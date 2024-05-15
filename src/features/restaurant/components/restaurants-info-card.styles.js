@@ -48,6 +48,7 @@ export const Icon = styled.Image`
 
 export const ClosedTempText = styled.Text`
   color: ${(props) => props.theme.colors.text.error};
+  font-family: ${(props) => props.theme.fonts.body};
 `;
 
 export const RestaurantCardCover = styled(Card.Cover)``;

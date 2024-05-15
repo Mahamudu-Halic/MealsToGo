@@ -49,8 +49,8 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <RestaurantContextProvider>
-          <LocationContextProvider>
+        <LocationContextProvider>
+          <RestaurantContextProvider>
             <NavigationContainer>
               <Tap.Navigator
                 screenOptions={{
@@ -87,8 +87,8 @@ export default function App() {
                 />
               </Tap.Navigator>
             </NavigationContainer>
-          </LocationContextProvider>
-        </RestaurantContextProvider>
+          </RestaurantContextProvider>
+        </LocationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>

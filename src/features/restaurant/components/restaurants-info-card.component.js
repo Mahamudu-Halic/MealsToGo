@@ -23,7 +23,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     photos = [
       "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D",
     ],
-    address = "100 avenue Street",
+    address = "10 avenue Street",
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = true,
@@ -44,7 +44,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
           </Rating>
           <SectionEnd>
             {isClosedTemporarily && (
-              <ClosedTempText variant="label">Closed Temporary</ClosedTempText>
+              <ClosedTempText>Closed Temporary</ClosedTempText>
             )}
             {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
             <Icon source={{ uri: icon }} />
