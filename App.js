@@ -16,6 +16,7 @@ import { theme } from "./src/infrastructure/theme";
 import { SafeArea } from "./src/components/utility/safe-area.component";
 
 import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
+import { LocationContextProvider } from "./src/services/location/location.context";
 
 const Settings = () => (
   <SafeArea>
@@ -28,7 +29,6 @@ const Map = () => (
   <SafeArea>
     <View>
       <Text>Map!</Text>
-      <Ionicons name="md-checkmark-circle" size={32} color="green" />
     </View>
   </SafeArea>
 );
@@ -50,42 +50,44 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <RestaurantContextProvider>
-          <NavigationContainer>
-            <Tap.Navigator
-              screenOptions={{
-                tabBarActiveTintColor: "tomato",
-                // tabBarActiveTintColor: "#e91e63",
-              }}
-            >
-              <Tap.Screen
-                name="Restaurant"
-                component={RestaurantScreen}
-                options={{
-                  tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="restaurant" size={size} color={color} />
-                  ),
+          <LocationContextProvider>
+            <NavigationContainer>
+              <Tap.Navigator
+                screenOptions={{
+                  tabBarActiveTintColor: "tomato",
+                  // tabBarActiveTintColor: "#e91e63",
                 }}
-              />
-              <Tap.Screen
-                name="Map"
-                component={Map}
-                options={{
-                  tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="map" size={size} color={color} />
-                  ),
-                }}
-              />
-              <Tap.Screen
-                name="Settings"
-                component={Settings}
-                options={{
-                  tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="settings" size={size} color={color} />
-                  ),
-                }}
-              />
-            </Tap.Navigator>
-          </NavigationContainer>
+              >
+                <Tap.Screen
+                  name="Restaurant"
+                  component={RestaurantScreen}
+                  options={{
+                    tabBarIcon: ({ color, size }) => (
+                      <Ionicons name="restaurant" size={size} color={color} />
+                    ),
+                  }}
+                />
+                <Tap.Screen
+                  name="Map"
+                  component={Map}
+                  options={{
+                    tabBarIcon: ({ color, size }) => (
+                      <Ionicons name="map" size={size} color={color} />
+                    ),
+                  }}
+                />
+                <Tap.Screen
+                  name="Settings"
+                  component={Settings}
+                  options={{
+                    tabBarIcon: ({ color, size }) => (
+                      <Ionicons name="settings" size={size} color={color} />
+                    ),
+                  }}
+                />
+              </Tap.Navigator>
+            </NavigationContainer>
+          </LocationContextProvider>
         </RestaurantContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />

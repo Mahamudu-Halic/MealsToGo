@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { FlatList } from "react-native";
 import { ActivityIndicator, Searchbar } from "react-native-paper";
 import styled from "styled-components";
@@ -6,10 +6,8 @@ import styled from "styled-components";
 import { RestaurantInfoCard } from "../components/restaurants-info-card.component";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
-
-const SearchBarContainer = styled.View`
-  padding: ${(props) => props.theme.space.lg};
-`;
+import { LocationContext } from "../../../services/location/location.context";
+import { SearchBar } from "../components/search.component";
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
@@ -25,18 +23,21 @@ const ActivityIndicatorContainer = styled.View`
 `;
 
 export const RestaurantScreen = () => {
-  const [searchValue, setSearchValue] = useState("");
   const restaurantContext = useContext(RestaurantContext);
+  // const locationContext = useContext(LocationContext);
+
   const { restaurants, isLoading, error } = restaurantContext;
+  // const {
+  //   location,
+  //   isLoading: locationIsLoading,
+  //   error: locationError,
+  //   search,
+  //   keyword,
+  // } = locationContext;
+
   return (
     <SafeArea>
-      <SearchBarContainer>
-        <Searchbar
-          placeholder="Search"
-          value={searchValue}
-          onChangeText={setSearchValue}
-        />
-      </SearchBarContainer>
+      <SearchBar />
       <ActivityIndicatorContainer>
         <ActivityIndicator size={50} animating={isLoading} color="tomato" />
       </ActivityIndicatorContainer>
