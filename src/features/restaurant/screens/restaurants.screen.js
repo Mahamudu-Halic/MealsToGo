@@ -1,6 +1,5 @@
-
 import React, { useContext } from "react";
-import { FlatList } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import styled from "styled-components";
 import { ActivityIndicator } from "react-native-paper";
 
@@ -21,8 +20,7 @@ const ActivityIndicatorContainer = styled.View`
   align-items: center;
 `;
 
-
-export const RestaurantScreen = () => {
+export const RestaurantScreen = ({ navigation }) => {
   const restaurantContext = useContext(RestaurantContext);
 
   const { restaurants, isLoading, error } = restaurantContext;
@@ -37,7 +35,17 @@ export const RestaurantScreen = () => {
       {!isLoading && (
         <RestaurantList
           data={restaurants}
-          renderItem={({ item }) => <RestaurantInfoCard restaurant={item} />}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("RestaurantDetail", { details: item })
+                }
+              >
+                <RestaurantInfoCard restaurant={item} />
+              </TouchableOpacity>
+            );
+          }}
           keyExtractor={(item) => item.name}
         />
       )}
