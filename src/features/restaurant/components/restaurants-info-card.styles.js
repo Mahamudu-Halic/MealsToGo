@@ -28,7 +28,6 @@ export const Rating = styled.View`
 
 export const Section = styled.View`
   flex-direction: row;
-  // padding: ${(props) => props.theme.space.md} 0;
   justify-content: space-between;
   align-items: center;
 `;
