@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const RestaurantCard = styled(Card)`
   padding: ${(props) => props.theme.space.lg};
   background-color: #fff;
+  postion: relative;
 `;
 
 export const RestaurantTitle = styled.Text`
