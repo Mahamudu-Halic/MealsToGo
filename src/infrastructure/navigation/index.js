@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import AppNavigator from "./app.navigator";
+import { AuthContext } from "../../services/auth/auth.context";
+import { AuthNavigator } from "./auth.navigator";
 
 const Navigation = () => {
-  return <AppNavigator />;
+  const { isAuthorized } = useContext(AuthContext);
+  return isAuthorized ? <AppNavigator /> : <AuthNavigator />;
 };
 
 export default Navigation;

@@ -23,7 +23,6 @@ export const FavoriteContextProvider = ({ children }) => {
       await AsyncStorage.setItem("@favorites", jsonValue);
     } catch (e) {
       // saving error
-      console.log("storeFavorites", e);
     }
   };
 

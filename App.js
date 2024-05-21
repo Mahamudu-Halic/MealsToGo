@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import {
   useFonts as useOswald,
@@ -11,6 +12,9 @@ import { RestaurantContextProvider } from "./src/services/restaurants/restaurant
 import { LocationContextProvider } from "./src/services/location/location.context";
 import Navigation from "./src/infrastructure/navigation";
 import { FavoriteContextProvider } from "./src/services/favorite/favorite.context";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./firebase";
+import { AuthContextProvider } from "./src/services/auth/auth.context";
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
@@ -26,13 +30,15 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavoriteContextProvider>
-          <LocationContextProvider>
-            <RestaurantContextProvider>
-              <Navigation />
-            </RestaurantContextProvider>
-          </LocationContextProvider>
-        </FavoriteContextProvider>
+        <AuthContextProvider>
+          <FavoriteContextProvider>
+            <LocationContextProvider>
+              <RestaurantContextProvider>
+                <Navigation />
+              </RestaurantContextProvider>
+            </LocationContextProvider>
+          </FavoriteContextProvider>
+        </AuthContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
