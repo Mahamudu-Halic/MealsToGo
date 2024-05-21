@@ -10,23 +10,24 @@ import {
 } from "../components/account.styles";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../services/auth/auth.context";
+import { ActivityIndicator } from "react-native-paper";
 
 export const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { isAuthorized, onLogin, isLoading } = useContext(AuthContext);
+  const { isAuthorized, onRegister, isLoading } = useContext(AuthContext);
 
-  const authLogin = () => {
-    email.trim() && password.trim() && onLogin(email, password);
+  const authRegister = () => {
+    email.trim() && password.trim() && onRegister(email, password);
   };
 
-  const login = () => {
+  const register = () => {
     isAuthorized && navigation.navigate("Restaurant");
   };
 
   useEffect(() => {
-    login();
+    register();
   }, [isAuthorized]);
   return (
     <AccountBackground>
@@ -46,15 +47,21 @@ export const RegisterScreen = ({ navigation }) => {
         </AccountTextInputContainer>
         <AccountButton
           mode="contained"
-          onPress={() => navigation.navigate("Login")}
-          icon={"account-plus"}
+          onPress={authRegister}
+          icon={!isLoading && "account-plus"}
+          disabled={isLoading}
         >
-          Register
+          {!isLoading ? (
+            "Register"
+          ) : (
+            <ActivityIndicator size={20} animating={isLoading} color="tomato" />
+          )}
         </AccountButton>
         <AccountButton
           mode="contained"
           onPress={() => navigation.navigate("Home")}
           icon={"home"}
+          disabled={isLoading}
         >
           Go back home
         </AccountButton>

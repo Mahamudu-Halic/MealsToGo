@@ -52,6 +52,7 @@ export const LoginScreen = ({ navigation }) => {
           mode="contained"
           onPress={authLogin}
           icon={!isLoading && "lock-outline"}
+          disabled={isLoading}
         >
           {!isLoading ? (
             "Login"
@@ -63,6 +64,7 @@ export const LoginScreen = ({ navigation }) => {
           mode="contained"
           onPress={() => navigation.navigate("Home")}
           icon={"home"}
+          disabled={isLoading}
         >
           Go back home
         </AccountButton>
