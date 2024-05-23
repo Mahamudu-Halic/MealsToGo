@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
-import { FlatList, TouchableOpacity } from "react-native";
-import styled from "styled-components";
+import { useContext, useState } from "react";
+import { TouchableOpacity } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 import { RestaurantInfoCard } from "../components/restaurants-info-card.component";
@@ -9,36 +8,30 @@ import { RestaurantContext } from "../../../services/restaurants/restaurants.con
 import { Search } from "../components/search.component";
 import { FavoritesBar } from "../../../components/favorites/favorites-bar.component";
 import { FavoriteContext } from "../../../services/favorite/favorite.context";
-
-const RestaurantList = styled(FlatList).attrs({
-  contentContainerStyle: {
-    padding: 16,
-    gap: 16,
-  },
-})``;
-const ActivityIndicatorContainer = styled.View`
-  flex: 0.5;
-  justify-content: center;
-  align-items: center;
-`;
+import {
+  ActivityIndicatorContainer,
+  RestaurantList,
+} from "../../../components/restaurant/restaurants.screen.styles";
 
 export const RestaurantScreen = ({ navigation }) => {
   const restaurantContext = useContext(RestaurantContext);
 
-  const {favorites} = useContext(FavoriteContext)
+  const { favorites } = useContext(FavoriteContext);
 
   const { restaurants, isLoading, error } = restaurantContext;
 
-  const [isToggled, setIsToggled] = useState(false)
+  const [isToggled, setIsToggled] = useState(false);
 
   const onToggle = () => {
     setIsToggled(!isToggled);
-  }
+  };
 
   return (
     <SafeArea>
-      <Search isFavoriteToggled={isToggled} onFavoriteToggle={onToggle}/>
-      {isToggled && <FavoritesBar favorites={favorites} onNavigate={navigation.navigate} />}
+      <Search isFavoriteToggled={isToggled} onFavoriteToggle={onToggle} />
+      {isToggled && (
+        <FavoritesBar favorites={favorites} onNavigate={navigation.navigate} />
+      )}
       <ActivityIndicatorContainer>
         <ActivityIndicator size={50} animating={isLoading} color="tomato" />
       </ActivityIndicatorContainer>

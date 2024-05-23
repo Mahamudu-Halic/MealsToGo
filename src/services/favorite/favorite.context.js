@@ -1,10 +1,12 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthContext } from "../auth/auth.context";
 
 export const FavoriteContext = createContext();
 
 export const FavoriteContextProvider = ({ children }) => {
   const [favorites, setFavrites] = useState([]);
+  const { user } = useContext(AuthContext);
 
   const add = (restaurant) => {
     setFavrites([...favorites, restaurant]);
@@ -20,7 +22,7 @@ export const FavoriteContextProvider = ({ children }) => {
   const storeFavorites = async (value) => {
     try {
       const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@favorites", jsonValue);
+      await AsyncStorage.setItem(`@favorites-${user?.uid}`, jsonValue);
     } catch (e) {
       // saving error
     }
@@ -28,7 +30,7 @@ export const FavoriteContextProvider = ({ children }) => {
 
   const getFavorites = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem("@favorites");
+      const jsonValue = await AsyncStorage.getItem(`@favorites-${user?.uid}`);
       return setFavrites(() =>
         jsonValue != null ? JSON.parse(jsonValue) : []
       );
