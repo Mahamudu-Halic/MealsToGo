@@ -12,6 +12,7 @@ import {
   ActivityIndicatorContainer,
   RestaurantList,
 } from "../../../components/restaurant/restaurants.screen.styles";
+import { FadeInView } from "../../../components/animations/fade-in.animation";
 
 export const RestaurantScreen = ({ navigation }) => {
   const restaurantContext = useContext(RestaurantContext);
@@ -46,7 +47,9 @@ export const RestaurantScreen = ({ navigation }) => {
                   navigation.navigate("RestaurantDetail", { details: item })
                 }
               >
-                <RestaurantInfoCard restaurant={item} />
+                <FadeInView>
+                  <RestaurantInfoCard restaurant={item} />
+                </FadeInView>
               </TouchableOpacity>
             );
           }}

@@ -23,7 +23,7 @@ const AppNavigator = () => {
               }}
             >
               <Tap.Screen
-                name="Restaurants Navigator"
+                name="Restaurants"
                 component={RestaurantsNavigator}
                 options={{
                   tabBarIcon: ({ color, size }) => (
@@ -41,7 +41,7 @@ const AppNavigator = () => {
                 }}
               />
               <Tap.Screen
-                name="Settings Navigator"
+                name="Settings"
                 component={SettingsNavigator}
                 options={{
                   tabBarIcon: ({ color, size }) => (
