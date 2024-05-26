@@ -8,6 +8,7 @@ export const FavoriteContextProvider = ({ children }) => {
   const [favorites, setFavrites] = useState([]);
   const { user } = useContext(AuthContext);
 
+  console.log(favorites);
   const add = (restaurant) => {
     setFavrites([...favorites, restaurant]);
   };
@@ -23,6 +24,7 @@ export const FavoriteContextProvider = ({ children }) => {
     try {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem(`@favorites-${user?.uid}`, jsonValue);
+      console.log("Updated favorites", jsonValue);
     } catch (e) {
       // saving error
     }

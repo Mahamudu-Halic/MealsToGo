@@ -11,6 +11,13 @@ export const AuthContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const [photo, setPhoto] = useState(null);
+  const [profile, setProfile] = useState(null);
+
+  const getProfile = async (id) => {
+    const image = await AsyncStorage.getItem(`@profile-${id}`);
+    setProfile(image);
+  };
 
   onAuthStateChanged(auth, (u) => {
     if (u) {
@@ -62,43 +69,17 @@ export const AuthContextProvider = ({ children }) => {
     signOutRequest();
   };
 
-  // const storeUser = async (value) => {
-  //   try {
-  //     const jsonValue = JSON.stringify(value);
-  //     console.log("[storeUser]:", jsonValue);
-  //     await AsyncStorage.setItem("@user", jsonValue);
-  //   } catch (e) {
-  //     // saving error
-  //   }
-  // };
-
-  // const getUser = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem("@user");
-  //     if (jsonValue != "null") {
-  //       console.log("[getuser]: ", jsonValue);
-  //       setUser(() => JSON.parse(jsonValue));
-  //       setIsAuthorized(true);
-  //     }
-  //   } catch (e) {
-  //     // error reading value
-  //     console.log("getUser", e);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   storeUser(user);
-  // }, [user]);
-
-  // useEffect(() => {
-  //   getUser();
-  // }, []);
+  useEffect(() => {
+    getProfile(user?.uid);
+  }, [user, photo]);
 
   const value = {
     user,
     isLoading,
     error,
     isAuthorized,
+    profile,
+    setPhoto,
     onLogin,
     onRegister,
     onSignOut,
